@@ -1,10 +1,10 @@
-<nav class="navbar bg-dark navbar-dark navbar-expand-sm">
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNav">
+<nav class="navbar bg-info navbar-dark navbar-expand-sm">
+    <button (click)="toggleCollapse()" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#myNav" aria-controls="myNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon "></span>
     </button>
 
     <a href="" class="navbar-brand">Logo</a>
-    <div class="collapse navbar-collapse" id="myNav">
+    <div class="collapse navbar-collapse" [class.show]="show" id="myNav">
       <ul class="navbar-nav">
         <li class="nav-item">
           <a href="main" class="nav-link">Старт</a>

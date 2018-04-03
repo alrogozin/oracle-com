@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'app';
+  show = false;
+
+  toggleCollapse() {
+    this.show = !this.show;
+    console.log('toggleCollapse');
+  }
 }

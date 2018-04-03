@@ -23,6 +23,11 @@ import { MainpageComponent } from './mainpage/mainpage.component';
       {
         path: 'main',
         component: MainpageComponent
+      },
+      {
+        path: '',
+        redirectTo: '/main',
+        pathMatch: 'full'
       }
       /*,
       {
