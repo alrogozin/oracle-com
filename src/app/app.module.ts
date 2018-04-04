@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+// for ngx-datatable:
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { AppBoostrapModule } from './app-boostrap/app-boostrap.module';
 import { AppComponent } from './app.component';
@@ -18,6 +20,7 @@ import { TceService } from './services/tce.service';
     TceListComponent
   ],
   imports: [
+    NgxDatatableModule, // NgxDatatable
     BrowserModule,
     AppBoostrapModule,
     FormsModule,
