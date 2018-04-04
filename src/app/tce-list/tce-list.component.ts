@@ -18,7 +18,6 @@ export class TceListComponent implements OnInit {
       .then((tce_list) => {
             this.tce_list = tce_list;
             this.tce_list_loaded = true;
-            console.log('done!', this.tce_list);
       });
   }
 

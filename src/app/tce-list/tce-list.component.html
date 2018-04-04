@@ -1,6 +1,6 @@
 <ul *ngFor="let tce of tce_list">
-  <li>{{ tce.name }} </li>
+  <li>{{ tce.name }} {{ tce.num_order }}</li>
 </ul>
-<p *ngIf="tce_list_loaded">
+<p *ngIf="!tce_list_loaded">
   Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi, unde?
 </p>

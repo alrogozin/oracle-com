@@ -13,9 +13,9 @@ export class TceService {
 
 	getAllTce(): Promise<TceUnit[]> {
 		return this.http
-			.get(DB_SERVER + '/eco_vtce_unit')
+			.get(DB_SERVER + '/eco_vtce_unit?order=num_order.asc')
 			.toPromise()
-			.then( response => response.json().data as TceUnit[])
+			.then( response => response.json() as TceUnit[] )
 			.catch(this.HandleError)
 			;
 	}
