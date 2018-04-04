@@ -8,11 +8,14 @@ import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { HttpModule } from '@angular/http';
 import { MainpageComponent } from './mainpage/mainpage.component';
+import { TceListComponent } from './tce-list/tce-list.component';
+import { TceService } from './services/tce.service';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MainpageComponent
+    MainpageComponent,
+    TceListComponent
   ],
   imports: [
     BrowserModule,
@@ -28,12 +31,12 @@ import { MainpageComponent } from './mainpage/mainpage.component';
         path: '',
         redirectTo: '/main',
         pathMatch: 'full'
+      },
+      {
+        path: 'tce_list',
+        component: TceListComponent
       }
       /*,
-      {
-        path: 'editnewrecipe',
-        component: EditNewRecipeComponent
-      },
       {
         path: '',
         redirectTo: '/recipes',
@@ -46,7 +49,7 @@ import { MainpageComponent } from './mainpage/mainpage.component';
       */
     ])
   ],
-  providers: [],
+  providers: [TceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
