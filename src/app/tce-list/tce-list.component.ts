@@ -6,7 +6,12 @@ import { TceUnit } from '../model/tce_unit';
 @Component({
   selector: 'app-tce-list',
   templateUrl: './tce-list.component.html',
-  styleUrls: ['./tce-list.component.css']
+  styleUrls: [
+    './tce-list.component.css',
+    '../../themes/material.scss',
+    '../../themes/dark.scss',
+    '../../themes/bootstrap.scss'
+  ],
 })
 export class TceListComponent implements OnInit {
 
