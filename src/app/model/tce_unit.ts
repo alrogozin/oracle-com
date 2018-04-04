@@ -9,15 +9,18 @@ export interface ITceUnit {
 }
 
 export class TceUnit implements ITceUnit {
-	public id: number;
-	public abbr: string;
-	public name: string;
-	public dimension?: string;
+
+	public id: 			number;
+	public tce_id: 		number;
+	public abbr: 		string;
+	public name: 		string;
+	public dimension?: 	string;
 	public detection_limit?: number;
-	public num_order?: number;
+	public num_order?: 	number;
+
 	constructor(
 		id: 				number,
-		tce_id:				number;
+		tce_id:				number,
 		abbr: 				string,
 		name: 				string,
 		dimension: 			string,
