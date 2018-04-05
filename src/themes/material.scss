@@ -84,9 +84,6 @@
     }
   }
 
-	/**
-	 * Shared Styles
-	 */
 	.empty-row{
 		 height:50px;
 		 text-align: left;
@@ -102,9 +99,6 @@
 		 border-top: 0;
 	}
 
-	/**
-	 * Global Row Styles
-	 */
 	 .datatable-header,
 	 .datatable-body {
 		 .datatable-row-left {
@@ -122,9 +116,6 @@
 		}
 	}
 
-	/**
-	 * Header Styles
-	 */
 	.datatable-header {
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
 
@@ -178,9 +169,6 @@
     }
   }
 
-	/**
-	 * Body Styles
-	 */
 	.datatable-body {
 		.datatable-row-detail {
 			background: #f5f5f5;
@@ -260,9 +248,6 @@
 		}
 	}
 
-	/**
-	 * Footer Styles
-	 */
 	.datatable-footer {
 		border-top: 1px solid rgba(0, 0, 0, 0.12);
 		font-size: 12px;
@@ -323,9 +308,6 @@
 	}
 }
 
-/**
- * Checkboxes
-**/
 .datatable-checkbox {
   position: relative;
   margin: 0;
@@ -378,9 +360,7 @@
   }
 }
 
-/**
- * Progress bar animations
- */
+
 @keyframes query {
   0% {
     opacity: 1;

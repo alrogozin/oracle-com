@@ -7,16 +7,18 @@ import { TceUnit } from '../model/tce_unit';
   selector: 'app-tce-list',
   templateUrl: './tce-list.component.html',
   styleUrls: [
-    './tce-list.component.css',
-    '../../themes/material.scss',
-    '../../themes/dark.scss',
-    '../../themes/bootstrap.scss'
+    './tce-list.component.css'
+    , '../../themes/material.scss'
+    , '../../themes/bootstrap.scss'
+    , '../../themes/dark.scss'
   ],
 })
 export class TceListComponent implements OnInit {
 
   tce_list: TceUnit[];
   tce_list_loaded: boolean;
+  reorderable = true;
+  loadingIndicator = true;
   columns;
   rows;
 
@@ -25,21 +27,40 @@ export class TceListComponent implements OnInit {
       .then((tce_list) => {
             this.tce_list = tce_list;
             this.tce_list_loaded = true;
+            // console.log(this.tce_list);
       });
-      this.rows = [
-            {name: 'name_1', id: '1', tce_id: '1', abbr: 'abbr1', dimension: 'dimension_1', detection_limit: '0', num_order: '1'},
-      ];
+
       this.columns = [
-        {name: 'name'},
-        {id: 'id'},
-        {tce_id: 'tce_id'},
-        {abbr: 'abbr'},
-        {dimension: 'dimension'},
-        {detection_limit: 'detection_limit'},
-        {num_order:  'num_order' }
+        {name: 'name', prop: 'Наименование'},
+        {name: 'id'},
+        {name: 'tce_id', prop: 'TceId'},
+        {name: 'abbr'},
+        {name: 'dimension', prop: 'dimension'},
+        {name: 'detection_limit', prop: 'detectionlimit'},
+        {name: 'num_order' }
       ];
   }
 
   constructor(private router: Router, private tce_service: TceService) { }
+
+  getCellClass({ row, column, value }): any {
+    return {
+      'text-primary': value === 17
+    };
+  }
+
+  getRowClass(row): any {
+    return {
+      'text-danger': row.tce_id === 219
+      // 'bg-info': row.tce_id === 219
+    };
+  }
+
+  getHeaderClass(): any {
+    return {
+      'text-light': true, 'bg-primary': true
+    };
+  }
+
 
 }

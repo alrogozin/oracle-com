@@ -1,23 +1,31 @@
-<ngx-datatable 
-        class="bootstrap" 
+<div class="container" style="padding: 10px; border:1px solid black;">
+
+  <ngx-datatable 
+        class="material striped"
         [rows]="tce_list" 
         [columns]="columns"
         [columnMode]="'force'"
-        [headerHeight]="50"
-        [footerHeight]="50"
-        [limit]="40"
-        [rowHeight]="'auto'"
+        [headerHeight]="30"
+        [footerHeight]="30"
+        [rowHeight]='"auto"'
+        [limit]="20"
+        [rowHeight]="30"
         [reorderable]="reorderable"
         [scrollbarV]="false"
-        [scrollbarH]="true"
+        [scrollbarH]="false"
         [loadingIndicator]="loadingIndicator"
         >
-        <ngx-datatable-column name="id"></ngx-datatable-column>
-        <ngx-datatable-column name="tce_id"></ngx-datatable-column>
-        <ngx-datatable-column name="abbr"></ngx-datatable-column>
-        <ngx-datatable-column name="name"></ngx-datatable-column>
-        <ngx-datatable-column name="num_order"></ngx-datatable-column>
-<!-- <ul *ngFor="let tce of tce_list">
+        <!-- <ngx-datatable-column prop="id"         name="Ид."          width="60"></ngx-datatable-column>
+        <ngx-datatable-column prop="tce_id"     name="ид.ЗВ"        width="60"></ngx-datatable-column> -->
+        <ngx-datatable-column prop="num_order"  name="Номер п/п"  headerClass="is-gender" [cellClass]="getCellClass" [headerClass]="getHeaderClass" width="80"></ngx-datatable-column>
+        <ngx-datatable-column prop="abbr"       name="Аббр."        width="60" [headerClass]="getHeaderClass"></ngx-datatable-column>
+        <ngx-datatable-column prop="name"       name="Наименование" width="300" sortable="false" [headerClass]="getHeaderClass"></ngx-datatable-column>
+        <ngx-datatable-column prop="dimension"  name="Размерность"  width="120" [headerClass]="getHeaderClass"></ngx-datatable-column>
+        <ngx-datatable-column prop="detection_limit" name="Предел обн." width="80" [headerClass]="getHeaderClass"></ngx-datatable-column>
+            
+      </ngx-datatable>
+    </div>
+        <!-- <ul *ngFor="let tce of tce_list">
   <li>{{ tce.name }} {{ tce.num_order }}</li>
 </ul> -->
 <p *ngIf="!tce_list_loaded">

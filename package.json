@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve -p 4200 -H lsws702",
+    "start": "ng serve -p 4200 -H lsws702 --open",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
