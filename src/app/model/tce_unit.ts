@@ -1,3 +1,4 @@
+
 export interface ITceUnit {
 	id: 				number;
 	tce_id:				number;
@@ -6,6 +7,7 @@ export interface ITceUnit {
 	dimension?: 		string;
 	detection_limit?: 	number;
 	num_order?: 		number;
+	is_active:			boolean;
 }
 
 export class TceUnit implements ITceUnit {
@@ -17,6 +19,7 @@ export class TceUnit implements ITceUnit {
 	public dimension?: 	string;
 	public detection_limit?: number;
 	public num_order?: 	number;
+	public is_active:	boolean;
 
 	constructor(
 		id: 				number,
@@ -25,7 +28,8 @@ export class TceUnit implements ITceUnit {
 		name: 				string,
 		dimension: 			string,
 		detection_limit: 	number,
-		num_order: 			number
+		num_order: 			number,
+		is_active:			string
 	) {
 		this.id			= id;
 		this.tce_id		= tce_id;
@@ -34,6 +38,11 @@ export class TceUnit implements ITceUnit {
 		this.dimension	= dimension;
 		this.detection_limit	= detection_limit;
 		this.num_order	= num_order;
+		if ( is_active === 'Y') {
+			this.is_active	= true;
+		} else {
+			this.is_active	= false;
+		}
 	}
 
 	public static tceUnitFromJSON(obj: any): TceUnit {
@@ -44,7 +53,8 @@ export class TceUnit implements ITceUnit {
 			obj.name,
 			obj.dimension,
 			obj.detection_limit,
-			obj.num_order
+			obj.num_order,
+			obj.is_active
 		);
 	  }
 

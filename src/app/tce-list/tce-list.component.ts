@@ -1,7 +1,10 @@
+import { CheckboxEditorComponent } from './../checkbox-editor/checkbox-editor.component';
 import { Component, OnInit } from '@angular/core';
 import { TceService } from '../services/tce.service';
 import { Router } from '@angular/router';
 import { TceUnit } from '../model/tce_unit';
+import { CheckboxControlValueAccessor } from '@angular/forms';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-tce-list',
@@ -26,7 +29,7 @@ export class TceListComponent implements OnInit {
        });
      }
 
-  constructor(private router: Router, private tce_service: TceService) {
+  constructor(private router: Router, private tce_service: TceService, private _sanitizer: DomSanitizer) {
     this.settings = {
       defaultStyle: false,
       selectMode: 'multi',
@@ -40,7 +43,10 @@ export class TceListComponent implements OnInit {
         id: {
             title: 'cb',
             type: 'html',
-            valuePrepareFunction: (data) => {return '<input type="checkbox" checked>'},
+            editor: {
+              type: 'custom',
+              component: CheckboxEditorComponent
+            },
             filter: false
         },
           dimension: {title: 'Ед.измерения', filter: true, sort: false},
@@ -51,7 +57,13 @@ export class TceListComponent implements OnInit {
               width: '80px',
               filter: false,
               // valuePrepareFunction: (data) => {return '<span class="text-info">'+data+'</span>'}
-            }
+            },
+            is_active: {
+              title: 'Действует',
+              type: 'html',
+              filter: {type: 'checkbox', config: {true: 'Y', false: 'N'}},
+              valuePrepareFunction: (value) => { return this.getCheckBoxRender(value); }
+              }
         },
         actions: {
           delete: false,
@@ -80,6 +92,13 @@ export class TceListComponent implements OnInit {
      // ];
   }
 
+  getCheckBoxRender(data: any): SafeHtml {
+    if (data === 'Y') {
+      return this._sanitizer.bypassSecurityTrustHtml('<input type="checkbox" checked="true"  onclick="return false">');
+    } else {
+      return this._sanitizer.bypassSecurityTrustHtml('<input type="checkbox" checked="false"  onclick="return false">');
+    }
+  }
   onRowSelect(row: any): void{
     console.log('RS:', row);
   }
