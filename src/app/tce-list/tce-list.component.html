@@ -1,14 +1,7 @@
-<div class="row">
-  <div class="col-md-4">
-    <input *ngIf="config.filtering" placeholder="Filter all columns"
-           [ngTableFiltering]="config.filtering"
-           class="form-control"
-/>
+<div class="container container-fluid" style="padding:10px">
+  <div class="h4 text-info">Список</div>
+  <div>
+    <ng2-smart-table [settings]="settings" [source]="tce_list" (rowSelect)="onRowSelect($event)" (userRowSelect)="onUserRowSelect($event)"></ng2-smart-table>
   </div>
 </div>
-<br>
-<ng-table [config]="config"
-          (tableChanged)="onChangeTable(config)"
-          (cellClicked)="onCellClick($event)"
-          [rows]="rows" [columns]="columns">
-</ng-table>
+<!-- <input type="checkbox" checked="true"/> -->

@@ -14,52 +14,61 @@ export class TceListComponent implements OnInit {
 
   tce_list: TceUnit[];
   tce_list_loaded: boolean;
-  reorderable = true;
-  loadingIndicator = true;
-   rowData: any[];
-  columnDefs: any[];
-
-  public rows:Array<any> = [];
-  public columns:Array<any> = [
-    {title: 'Name', name: 'name', filtering: {filterString: '', placeholder: 'Filter by name'}},
-    {
-      title: 'Position',
-      name: 'position',
-      sort: false,
-      filtering: {filterString: '', placeholder: 'Filter by position'}
-    },
-    {title: 'Office', className: ['office-header', 'text-success'], name: 'office', sort: 'asc'},
-    {title: 'Extn.', name: 'ext', sort: '', filtering: {filterString: '', placeholder: 'Filter by extn.'}},
-    {title: 'Start date', className: 'text-warning', name: 'startDate'},
-    {title: 'Salary ($)', name: 'salary'}
-  ];
-  public config:any = {
-    paging: true,
-    sorting: {columns: this.columns},
-    filtering: {filterString: ''},
-    className: ['table-striped', 'table-bordered']
-  };
-  public page: number = 1;
-  public itemsPerPage: number = 10;
-  public maxSize: number = 5;
-  public numPages: number = 1;
-  public length: number = 0;
+  public settings: Object;
 
   ngOnInit() {
-/*
+
     this.tce_service.getAllTce()
       .then((tce_list) => {
             this.tce_list = tce_list;
             this.tce_list_loaded = true;
             // console.log(this.tce_list);
        });
-*/
-
-      }
+     }
 
   constructor(private router: Router, private tce_service: TceService) {
-
-
+    this.settings = {
+      defaultStyle: false,
+      selectMode: 'multi',
+      columns: {
+          abbr: {title: 'Аббр', width: '90px'},
+          name: {
+              title: 'Наименование',
+              type: 'html',
+              // valuePrepareFunction: (data) => {return '<span class="cell-center">'+data+'</span>'}
+        },
+        id: {
+            title: 'cb',
+            type: 'html',
+            valuePrepareFunction: (data) => {return '<input type="checkbox" checked>'},
+            filter: false
+        },
+          dimension: {title: 'Ед.измерения', filter: true, sort: false},
+          detection_limit: {title: 'Предел обнаружения', filter: false, sort: false},
+          num_order: {
+              title: '№ пп',
+              type: 'html',
+              width: '80px',
+              filter: false,
+              // valuePrepareFunction: (data) => {return '<span class="text-info">'+data+'</span>'}
+            }
+        },
+        actions: {
+          delete: false,
+          edit: false,
+          add: false
+        },
+        pager: {
+          display: true,
+          perPage: 20
+        },
+        delete: {
+          deleteButtonContent: 'Удалить'
+        },
+        attr: {
+          class: 'table-bordered table-striped'
+        }
+    };
       //  this.columns = [
       //  {field: 'name', headerName: 'name'}
       //  {field: 'id', headerName: 'Id'},
@@ -71,5 +80,12 @@ export class TceListComponent implements OnInit {
      // ];
   }
 
+  onRowSelect(row: any): void{
+    console.log('RS:', row);
+  }
+  // вроде, честнее работает!
+  onUserRowSelect(row: any): void{
+    console.log('URS:', row);
+  }
 
 }
