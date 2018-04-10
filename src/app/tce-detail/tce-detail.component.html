@@ -1,1 +1,21 @@
-{{ TceName }} - {{ TceId }}
+<div class="container">
+	<div class="row jumbotron jumbotron-fluid">
+		<div class="container">
+		  <h1 class="h1">{{ TceName }}</h1>
+		  <p class="lead"></p>
+		  <hr class="my-5">
+		  <ng2-smart-table [settings]="settings" [source]="TceZV"></ng2-smart-table>
+		  <hr class="my-5">
+		  <ng2-smart-table [settings]="settings_2" [source]="TceZVKoef"></ng2-smart-table>
+		  <!-- <ul>
+			  <li *ngFor="let r of TceZV">{{r.beg_date}} {{ r.end_date}} {{ r.grp_name }} {{ r.pdk }} {{ r.rough_koeff }}</li>
+		  </ul>
+		  <hr class="my-1">
+		  <ul>
+			<li *ngFor="let r of TceZVKoef">{{r.beg_date}} {{ r.end_date}} {{ r.condition_ }}</li>
+		</ul> -->
+		<hr class="my-1">
+		</div>
+	  </div>
+</div>
+

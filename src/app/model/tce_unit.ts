@@ -10,6 +10,33 @@ export interface ITceUnit {
 	is_active:			boolean;
 }
 
+export interface ITceZV {
+	id: 				number;
+	tce_id:				number;
+	grp_abbr:			string;
+	beg_date:			string;
+	end_date?:			string;
+	is_active:			boolean;
+	pdk?:				number;
+	pdk_lower?:			number;
+	num_order?: 		number;
+	rough_koeff?: 		number;
+	grp_name?:			string;
+	grp_num_order:		number;
+}
+
+export interface ITceZVKoef {
+	tce_id:				number;
+	beg_date:			string;
+	end_date?:			string;
+	beg_is_incl?:		string;
+	end_is_incl?:		string;
+	pdk_beg?:			number;
+	pdk_end?:			number;
+	condition_?:		string;
+	koef?:				number;
+}
+
 export class TceUnit implements ITceUnit {
 
 	public id: 			number;
