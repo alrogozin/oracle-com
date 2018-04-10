@@ -1,9 +1,11 @@
-import { CheckboxEditorComponent } from './../checkbox-editor/checkbox-editor.component';
 import { Component, OnInit } from '@angular/core';
 import { TceService } from '../services/tce.service';
 import { Router } from '@angular/router';
 import { TceUnit } from '../model/tce_unit';
 import { CheckboxControlValueAccessor } from '@angular/forms';
+
+// для колонки = checkbox
+import { CheckboxEditorComponent } from './../checkbox-editor/checkbox-editor.component';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
@@ -18,7 +20,7 @@ export class TceListComponent implements OnInit {
   tce_list: TceUnit[];
   tce_list_loaded: boolean;
   public settings: Object;
-
+  
   ngOnInit() {
 
     this.tce_service.getAllTce()
@@ -32,22 +34,13 @@ export class TceListComponent implements OnInit {
   constructor(private router: Router, private tce_service: TceService, private _sanitizer: DomSanitizer) {
     this.settings = {
       defaultStyle: false,
-      selectMode: 'multi',
+      // selectMode: 'multi', -> выделение строк
       columns: {
           abbr: {title: 'Аббр', width: '90px'},
           name: {
               title: 'Наименование',
               type: 'html',
               // valuePrepareFunction: (data) => {return '<span class="cell-center">'+data+'</span>'}
-        },
-        id: {
-            title: 'cb',
-            type: 'html',
-            editor: {
-              type: 'custom',
-              component: CheckboxEditorComponent
-            },
-            filter: false
         },
           dimension: {title: 'Ед.измерения', filter: true, sort: false},
           detection_limit: {title: 'Предел обнаружения', filter: false, sort: false},
@@ -56,14 +49,23 @@ export class TceListComponent implements OnInit {
               type: 'html',
               width: '80px',
               filter: false,
-              // valuePrepareFunction: (data) => {return '<span class="text-info">'+data+'</span>'}
             },
+            id: {
+              title: '',
+              type: 'html',
+              width: '100px',
+              // valuePrepareFunction: (data) => {return '<a href="#">'+data+'</a>'},
+              valuePrepareFunction: (data) => {return '<span class="btn btn-info btn-sm text-light" role="button">Подробности</span>'},
+              filter: false
+            },
+/* колонка с checkbox'ом
             is_active: {
               title: 'Действует',
               type: 'html',
               filter: {type: 'checkbox', config: {true: 'Y', false: 'N'}},
               valuePrepareFunction: (value) => { return this.getCheckBoxRender(value); }
               }
+*/
         },
         actions: {
           delete: false,
@@ -99,12 +101,14 @@ export class TceListComponent implements OnInit {
       return this._sanitizer.bypassSecurityTrustHtml('<input type="checkbox" checked="false"  onclick="return false">');
     }
   }
-  onRowSelect(row: any): void{
+  onRowSelect(row: any): void {
     console.log('RS:', row);
   }
+
   // вроде, честнее работает!
-  onUserRowSelect(row: any): void{
-    console.log('URS:', row);
+  onUserRowSelect(row: any): void {
+    console.log('URS: id==', row.data.id, row.data.name, row.data.abbr);
+    this.router.navigate(['/tce_detail'], { queryParams: {tce_id: row.data.tce_id, tce_name: row.data.name}});
   }
 
 }

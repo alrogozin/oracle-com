@@ -1,6 +1,7 @@
 .cell-center {
 	text-align: center;
 	width: 100%;
+	cursor: pointer;
 }
 .ng2-smart-titles { background-color: blue; }
 .ng2-smart-table-title a:focus { color: #009ECE; }

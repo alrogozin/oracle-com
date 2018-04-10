@@ -1,7 +1,9 @@
 <div class="container container-fluid" style="padding:10px">
   <div class="h4 text-info">Список</div>
   <div>
-    <ng2-smart-table [settings]="settings" [source]="tce_list" (rowSelect)="onRowSelect($event)" (userRowSelect)="onUserRowSelect($event)"></ng2-smart-table>
+    <!-- <ng2-smart-table [settings]="settings" [source]="tce_list" (rowSelect)="onRowSelect($event)" (userRowSelect)="onUserRowSelect($event)"></ng2-smart-table> -->
+    <ng2-smart-table [settings]="settings" [source]="tce_list" (userRowSelect)="onUserRowSelect($event)"></ng2-smart-table>
   </div>
 </div>
+<app-tce-detail></app-tce-detail>
 <!-- <input type="checkbox" checked="true"/> -->

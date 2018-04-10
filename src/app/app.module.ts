@@ -15,13 +15,15 @@ import { MainpageComponent } from './mainpage/mainpage.component';
 import { TceListComponent } from './tce-list/tce-list.component';
 import { TceService } from './services/tce.service';
 import { CheckboxEditorComponent } from './checkbox-editor/checkbox-editor.component';
+import { TceDetailComponent } from './tce-detail/tce-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MainpageComponent,
     TceListComponent,
-    CheckboxEditorComponent
+    CheckboxEditorComponent,
+    TceDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +44,12 @@ import { CheckboxEditorComponent } from './checkbox-editor/checkbox-editor.compo
       {
         path: 'tce_list',
         component: TceListComponent
+      },
+      {
+        path: 'tce_detail',
+        component: TceDetailComponent
       }
+
       /*,
       {
         path: '',

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
-const DB_SERVER = 'http://localhost:3500';
+const DB_SERVER = 'http://vlswswin10-03:3500';
 
 @Injectable()
 export class TceService {
