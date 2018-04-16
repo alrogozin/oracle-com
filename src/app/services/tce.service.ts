@@ -1,4 +1,4 @@
-import { TceUnit, ITceZVKoef } from './../model/tce_unit';
+import { TceUnit, ITceZVKoef, ITceZapr } from './../model/tce_unit';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
@@ -21,6 +21,15 @@ export class TceService {
 			;
 	}
 
+	getAllTceZapr(): Promise<ITceZapr[]> {
+		return this.http
+			.get(DB_SERVER + '/enpp_vtype_zapr?order=num_order.asc')
+			.toPromise()
+			.then( response => response.json() as ITceZapr[] )
+			.catch(this.HandleError)
+			;
+	}
+
 	getTceZV(tce_id: number): Promise<ITceZV[]> {
 		return this.http
 			.get(DB_SERVER + '/enpp_vtype_zv?tce_id=eq.'+tce_id+'&order=beg_date.desc')
@@ -32,7 +41,7 @@ export class TceService {
 
 	getTceZVKoef(tce_id: number): Promise<ITceZV[]> {
 		return this.http
-			.get(DB_SERVER + '/enpp_vtype_zv_koef?tce_id=eq.'+tce_id+'&order=beg_date.desc')
+			.get(DB_SERVER + '/enpp_vtype_zv_koef?tce_id=eq.'+tce_id+'&order=beg_date.desc,pdk_beg.desc')
 			.toPromise()
 			.then( response => response.json() as ITceZVKoef[] )
 			.catch(this.HandleError)

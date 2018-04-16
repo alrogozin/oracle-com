@@ -42,7 +42,7 @@ export class TceListComponent implements OnInit {
               type: 'html',
               // valuePrepareFunction: (data) => {return '<span class="cell-center">'+data+'</span>'}
         },
-          dimension: {title: 'Ед.измерения', filter: true, sort: false},
+          dimension: {title: 'Ед.измерения', filter: true, sort: true},
           detection_limit: {title: 'Предел обнаружения', filter: false, sort: false},
           num_order: {
               title: '№ пп',
@@ -74,7 +74,7 @@ export class TceListComponent implements OnInit {
         },
         pager: {
           display: true,
-          perPage: 20
+          perPage: 15
         },
         delete: {
           deleteButtonContent: 'Удалить'

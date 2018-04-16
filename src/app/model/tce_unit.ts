@@ -15,7 +15,9 @@ export interface ITceZV {
 	tce_id:				number;
 	grp_abbr:			string;
 	beg_date:			string;
+	beg_date_str:		string;
 	end_date?:			string;
+	end_date_str?:		string;
 	is_active:			boolean;
 	pdk?:				number;
 	pdk_lower?:			number;
@@ -29,12 +31,29 @@ export interface ITceZVKoef {
 	tce_id:				number;
 	beg_date:			string;
 	end_date?:			string;
+	beg_date_str:		string;
+	end_date_str?:		string;
 	beg_is_incl?:		string;
 	end_is_incl?:		string;
 	pdk_beg?:			number;
 	pdk_end?:			number;
 	condition_?:		string;
 	koef?:				number;
+}
+
+export interface ITceZapr {
+	id:					number;
+	tce_id:				number;
+	beg_date:			string;
+	end_date?:			string;
+	beg_date_str:		string;
+	end_date_str?:		string;
+	pdk:				number;
+	remark?:			string;
+	ndoc_type?:			string;
+	tce_name:			string;
+	num_order?:			number;
+	dimension?:			string;
 }
 
 export class TceUnit implements ITceUnit {
