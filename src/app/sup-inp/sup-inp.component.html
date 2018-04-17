@@ -1,3 +1,10 @@
-<p>
-  sup-inp works!
-</p>
+<div>
+    <ng2-smart-table
+      [settings]="settings"
+      [source]="sup_inp"
+      (createConfirm)="onCreateConfirm($event)"
+      (deleteConfirm)="onDeleteConfirm($event)"
+      (editConfirm)="onSaveConfirm($event)"
+    ></ng2-smart-table>
+    <!-- <button type="button" (click)="onPressBtn($event)">Test</button> -->
+</div>
