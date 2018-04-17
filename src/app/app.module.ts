@@ -18,6 +18,7 @@ import { CheckboxEditorComponent } from './checkbox-editor/checkbox-editor.compo
 import { TceDetailComponent } from './tce-detail/tce-detail.component';
 import { TceZaprListComponent } from './tce-zapr-list/tce-zapr-list.component';
 import { SupInpComponent } from './sup-inp/sup-inp.component';
+import { DeclDataComponent } from './decl-data/decl-data.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { SupInpComponent } from './sup-inp/sup-inp.component';
     CheckboxEditorComponent,
     TceDetailComponent,
     TceZaprListComponent,
-    SupInpComponent
+    SupInpComponent,
+    DeclDataComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +54,10 @@ import { SupInpComponent } from './sup-inp/sup-inp.component';
       {
         path: 'tce_detail',
         component: TceDetailComponent
+      },
+      {
+        path: 'decl-data',
+        component: DeclDataComponent
       },
       {
         path: 'tce_zapr_list',

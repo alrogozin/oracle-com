@@ -37,6 +37,7 @@ export class SupInpComponent implements OnInit {
               filter: false,
               sort: false
         },
+        /*
         is_active: {
           title: 'Действует',
           type: 'html',
@@ -45,7 +46,16 @@ export class SupInpComponent implements OnInit {
           // filter: {type: 'checkbox', config: {true: 'Y', false: 'N'}},
           valuePrepareFunction: (value) => { return this.getCheckBoxRender(value); }
           }
+        */
+        id: {
+          title: '',
+          type: 'html',
+          width: '100px',
+          // valuePrepareFunction: (data) => {return '<a href="#">'+data+'</a>'},
+          valuePrepareFunction: (data) => { return '<span class="btn btn-info btn-sm text-light" role="button">Подробности</span>' },
+          filter: false
         },
+      },
         actions: {
           delete: true,
           edit: true,
@@ -85,8 +95,10 @@ export class SupInpComponent implements OnInit {
       return this._sanitizer.bypassSecurityTrustHtml('<input type="checkbox" checked="false"  onclick="return false">');
     }
   }
-  onRowSelect(row: any): void {
-    console.log('RS:', row);
+
+  onUserRowSelect(row: any): void {
+    console.log('URS: id==', row.data.id, row.data.tag);
+    this.router.navigate(['/decl-data'], { queryParams: {id: row.data.id, tag: row.data.tag}});
   }
 
   onCreateConfirm(event) {
@@ -131,7 +143,7 @@ export class SupInpComponent implements OnInit {
 
   onSaveConfirm(event) {
     if (window.confirm('Сохранить изменения ?')) {
-        this.tce_service.updateSup(event.data).subscribe((data: any) => {
+        this.tce_service.updateSup(event.newData).subscribe((data: any) => {
           this.tce_service.getAllSupInps()
           .then((sup_inp) => {
                 this.sup_inp = sup_inp;

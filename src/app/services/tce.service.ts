@@ -77,6 +77,7 @@ export class TceService {
 
 	updateSup(instance: ISupInp) {
 		const headers = new HttpHeaders().set('content-Type', 'multipart/form-data');
+		console.log(instance);
 		return this.http.patch(DB_SERVER + '/sup_inp?id=eq.' + instance.id, instance)
 			.map((response: Response) => response.json());
 	}
