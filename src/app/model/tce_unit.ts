@@ -54,6 +54,7 @@ export interface ITceZapr {
 	tce_name:			string;
 	num_order?:			number;
 	dimension?:			string;
+	is_current:			string;
 }
 
 export class TceUnit implements ITceUnit {

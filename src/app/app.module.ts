@@ -17,6 +17,7 @@ import { TceService } from './services/tce.service';
 import { CheckboxEditorComponent } from './checkbox-editor/checkbox-editor.component';
 import { TceDetailComponent } from './tce-detail/tce-detail.component';
 import { TceZaprListComponent } from './tce-zapr-list/tce-zapr-list.component';
+import { SupInpComponent } from './sup-inp/sup-inp.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { TceZaprListComponent } from './tce-zapr-list/tce-zapr-list.component';
     TceListComponent,
     CheckboxEditorComponent,
     TceDetailComponent,
-    TceZaprListComponent
+    TceZaprListComponent,
+    SupInpComponent
   ],
   imports: [
     BrowserModule,

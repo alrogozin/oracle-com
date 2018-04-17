@@ -29,14 +29,40 @@ export class TceZaprListComponent implements OnInit {
               // valuePrepareFunction: (data) => {return '<span class="cell-center">'+data+'</span>'}
         },
         beg_date_str: {title: 'Дата с', width: '120px', filter: false, sort: true},
-        end_date_str: {title: 'Дата по', width: '120px', filter: false, sort: true},
+        end_date_str: {
+          title: 'Дата по',
+          width: '120px',
+          filter: {
+            type: 'checkbox',
+            config: {
+              true: 'Y',
+              false: 'N',
+              data: this.tce_zapr,
+              resetText: 'очистить',
+              searchFileds: 'is_current',
+            }
+          },
+          filterFunction(cell: any, search?: string): boolean {
+            if (search === 'Y') {
+              if (cell === '' ){
+                return true;
+              } else {
+                return false;
+              }
+            } else {
+              if (cell === '' ){
+                return false;
+              } else {
+                return true;
+              }
+            }
+          },
+          sort: true
+          },
         pdk: {title: 'ПДКx4', width: '120px', filter: false, sort: true},
         dimension: {title: 'Ед.измерения', width: '120px', filter: true, sort: true},
         ndoc_type: {title: 'Тип постановления', filter: true, sort: true},
-
-//        dimension: {title: 'Ед.измерения', filter: true, sort: false},
-//          detection_limit: {title: 'Предел обнаружения', filter: false, sort: false},
-          num_order: {
+        num_order: {
               title: '№ пп',
               type: 'html',
               width: '80px',
@@ -68,7 +94,6 @@ export class TceZaprListComponent implements OnInit {
       .then((tce_zapr) => {
             this.tce_zapr = tce_zapr;
             this.tce_zapr_loaded = true;
-            console.log(this.tce_zapr);
        });
      }
 }
