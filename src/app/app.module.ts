@@ -19,6 +19,7 @@ import { TceDetailComponent } from './tce-detail/tce-detail.component';
 import { TceZaprListComponent } from './tce-zapr-list/tce-zapr-list.component';
 import { SupInpComponent } from './sup-inp/sup-inp.component';
 import { DeclDataComponent } from './decl-data/decl-data.component';
+import { DeclHdrService } from './services/decls.service';
 
 @NgModule({
   declarations: [
@@ -77,7 +78,7 @@ import { DeclDataComponent } from './decl-data/decl-data.component';
       */
     ])
   ],
-  providers: [TceService],
+  providers: [TceService, DeclHdrService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
