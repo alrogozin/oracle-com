@@ -10,6 +10,8 @@ const DB_SERVER = 'http://vlswswin10-03:3500';
 @Injectable()
 export class TceService {
 
+	public TceList: TceUnit[] = null;
+
 	constructor(private http: Http) {
 	}
 

@@ -20,15 +20,20 @@ export class TceListComponent implements OnInit {
   tce_list: TceUnit[];
   tce_list_loaded: boolean;
   public settings: Object;
-  
-  ngOnInit() {
 
-    this.tce_service.getAllTce()
-      .then((tce_list) => {
-            this.tce_list = tce_list;
-            this.tce_list_loaded = true;
-            // console.log(this.tce_list);
-       });
+  ngOnInit() {
+    if (!this.tce_list ||  this.tce_list.length === 0 ) {
+      this.tce_service.getAllTce()
+        .then((tce_list) => {
+              this.tce_list = tce_list;
+              this.tce_list_loaded = true;
+              console.log('new data');
+              // console.log(this.tce_list);
+        });
+      } else {
+        this.tce_list_loaded = true;
+        console.log('old data');
+      }
      }
 
   constructor(private router: Router, private tce_service: TceService, private _sanitizer: DomSanitizer) {
