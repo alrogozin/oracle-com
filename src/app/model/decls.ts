@@ -1,21 +1,21 @@
 export interface IDeclHdr {
-	id: 				number;
-	calc_on_date:		Date;
-	sinp_id:			number;
-	is_current:			string;
-	date_in:			Date;
-	koeff_itogo:		number;
+	id?: 				number;
+	calc_on_date?:		Date;
+	sinp_id?:			number;
+	is_current?:		string;
+	date_in?:			Date;
+	koeff_itogo?:		number;
 	remark?:			string;
 	usr?:				number;
 }
 
 export class DeclHdr implements IDeclHdr {
-	public id: 				number;
-	public calc_on_date:	Date;
-	public sinp_id:			number;
-	public is_current:		string;
-	public date_in:			Date;
-	public koeff_itogo:		number;
+	public id?: 			number;
+	public calc_on_date?:	Date;
+	public sinp_id?:		number;
+	public is_current?:		string;
+	public date_in?:		Date;
+	public koeff_itogo?:	number;
 	public remark?:			string;
 	public usr?:			number;
 

@@ -14,7 +14,7 @@ import { DeclHdr } from '../model/decls';
 })
 export class DeclDataComponent implements OnInit {
   public VypId: number;
-  public VypTag: string = 'n/a';
+  public VypTag = 'n/a';
   public DeclHdrList: DeclHdr[];
 
   constructor(

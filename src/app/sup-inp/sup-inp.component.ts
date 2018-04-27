@@ -1,9 +1,13 @@
+import { CommonTools } from './../model/common.tools';
+import { DeclHdrService } from './../services/decls.service';
 import { ISupInp } from './../model/sup_inps';
 import { Component, OnInit } from '@angular/core';
 import { TceService } from '../services/tce.service';
 import { Router } from '@angular/router';
 import { CheckboxEditorComponent } from './../checkbox-editor/checkbox-editor.component';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { IDeclHdr } from '../model/decls';
+
 
 @Component({
   selector: 'app-sup-inp',
@@ -26,7 +30,12 @@ export class SupInpComponent implements OnInit {
        });
      }
 
-  constructor(private router: Router, private tce_service: TceService, private _sanitizer: DomSanitizer) {
+  constructor(
+                private router: Router,
+                private tce_service: TceService,
+                private _sanitizer: DomSanitizer,
+                private DeclService: DeclHdrService
+              ) {
     this.settings = {
       defaultStyle: false,
       hoDataMessage: 'Нет данных',
@@ -37,16 +46,6 @@ export class SupInpComponent implements OnInit {
               filter: false,
               sort: false
         },
-        /*
-        is_active: {
-          title: 'Действует',
-          type: 'html',
-          filter: false,
-          sort: true,
-          // filter: {type: 'checkbox', config: {true: 'Y', false: 'N'}},
-          valuePrepareFunction: (value) => { return this.getCheckBoxRender(value); }
-          }
-        */
         id: {
           title: '',
           type: 'html',
@@ -110,6 +109,20 @@ export class SupInpComponent implements OnInit {
           this.tce_service.getAllSupInps()
           .then((sup_inp) => {
                 this.sup_inp = sup_inp;
+                console.log('onCreateConfirm last.id=', this.sup_inp[0].id, new Date().getTimezoneOffset()); //Date.now().toString());
+                const iDH: IDeclHdr = {
+                    id:               -1,
+                    calc_on_date:     null,
+                    sinp_id:          this.sup_inp[0].id,
+                    is_current:       'Y',
+                    date_in:          CommonTools.getSysdate(),
+                    koeff_itogo:      null,
+                    remark:           '',
+                    usr:              this.sup_inp[0].usr
+                  };
+                  this.DeclService.createDeclHeader(iDH).subscribe((dataDH: any) => {
+                    console.log('dataDH:', dataDH);
+                  });
                 this.sup_inp_loaded = true;
                 event.confirm.resolve();
           });

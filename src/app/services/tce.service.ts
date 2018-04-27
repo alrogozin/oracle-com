@@ -1,3 +1,4 @@
+import { DeclHdrService } from './decls.service';
 import { TceUnit, ITceZVKoef, ITceZapr, ITceZV } from './../model/tce_unit';
 import {HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -12,7 +13,7 @@ export class TceService {
 
 	public TceList: TceUnit[] = null;
 
-	constructor(private http: Http) {
+	constructor(private http: Http, private declService: DeclHdrService) {
 	}
 
 	getAllSupInps(): Promise<ISupInp[]> {
@@ -66,6 +67,12 @@ export class TceService {
 	}
 
 	createSup(instance: ISupInp) {
+		const headers = new HttpHeaders().set('content-Type', 'multipart/form-data');
+        return this.http.post(DB_SERVER + '/sup_inp', instance)
+		.catch(this.HandleError);
+	}
+
+	fillDeclsData(instance: ISupInp) {
 		const headers = new HttpHeaders().set('content-Type', 'multipart/form-data');
         return this.http.post(DB_SERVER + '/sup_inp', instance)
 		.catch(this.HandleError);

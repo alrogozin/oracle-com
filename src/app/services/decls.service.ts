@@ -30,11 +30,11 @@ export class DeclHdrService {
 		return Promise.reject(error.message || error);
 	}
 
-	// createSup(instance: ISupInp) {
-	// 	const headers = new HttpHeaders().set('content-Type', 'multipart/form-data');
-    //     return this.http.post(DB_SERVER + '/sup_inp', instance)
-	// 	.catch(this.HandleError);
-	// }
+	public createDeclHeader(instance: IDeclHdr) {
+	 	const headers = new HttpHeaders().set('content-Type', 'multipart/form-data');
+         return this.http.post(DB_SERVER + '/decl_hdr', instance)
+	 	.catch(this.HandleError);
+	}
 
 	// deleteSup(id: number) {
 	// 	const headers = new HttpHeaders().set('content-Type', 'multipart/form-data');
