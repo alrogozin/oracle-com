@@ -25,17 +25,6 @@ export class DeclHdrService {
 		;
 	}
 
-	public getNewHdrId(): Promise<Number> {
-		return this.http
-			.get(DB_SERVER + '/decl_hdr_id_seq')
-			.toPromise()
-			.then(
-				response => response.json()[0].last_value
-			)
-			.catch(this.HandleError)
-		;
-	}
-
 	private HandleError(error: any): Promise<any> {
 		console.error('Error: ' + error);
 		return Promise.reject(error.message || error);

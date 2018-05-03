@@ -20,6 +20,7 @@ import { TceZaprListComponent } from './tce-zapr-list/tce-zapr-list.component';
 import { SupInpComponent } from './sup-inp/sup-inp.component';
 import { DeclDataComponent } from './decl-data/decl-data.component';
 import { DeclHdrService } from './services/decls.service';
+import { CommonToolsService } from './services/common.tools.service';
 
 @NgModule({
   declarations: [
@@ -78,7 +79,7 @@ import { DeclHdrService } from './services/decls.service';
       */
     ])
   ],
-  providers: [TceService, DeclHdrService],
+  providers: [TceService, DeclHdrService, CommonToolsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

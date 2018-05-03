@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { CheckboxEditorComponent } from './../checkbox-editor/checkbox-editor.component';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { IDeclHdr } from '../model/decls';
+import { CommonToolsService } from '../services/common.tools.service';
 
 
 @Component({
@@ -34,7 +35,8 @@ export class SupInpComponent implements OnInit {
                 private router: Router,
                 private tce_service: TceService,
                 private _sanitizer: DomSanitizer,
-                private DeclService: DeclHdrService
+                private DeclService: DeclHdrService,
+                private CommonToolsSrv: CommonToolsService
               ) {
     this.settings = {
       defaultStyle: false,
@@ -103,15 +105,13 @@ export class SupInpComponent implements OnInit {
   onCreateConfirm(event) {
     if (window.confirm('Создать новый выпуск?')) {
         const d: ISupInp = {is_active: 'Y', remark: event.newData.remark, tag: event.newData.tag, usr: -888};
-
-        this.sup_inp.push(d);
         this.tce_service.createSup(d).subscribe((data: any) => {
           this.tce_service.getAllSupInps()
           .then((sup_inp) => {
                 this.sup_inp = sup_inp;
-                // Создается запись в Decl_Hdr
-                this.DeclService.getNewHdrId()
+                this.CommonToolsSrv.NextId('decl_hdr_id_seq')
                 .then((newId) => {
+                // Создается запись в Decl_Hdr
                   const iDH: IDeclHdr = {
                     id:               (newId.valueOf() + 1),
                     calc_on_date:     null,
@@ -123,18 +123,22 @@ export class SupInpComponent implements OnInit {
                     usr:              this.sup_inp[0].usr
                   };
                   this.DeclService.createDeclHeader(iDH).subscribe((dataDH: any) => {
+                    this.DeclService.getAllDeclHdr('Y', this.sup_inp[0].id)
+                    .then((decl_hdr) => {
+                      // console.log(decl_hdr);
+                    });
                     // Тут нужно выполнить заполнение ЗВ
                   });
-                this.sup_inp_loaded = true;
-                event.confirm.resolve();
-
                 });
+
+            this.sup_inp_loaded = true;
+            event.confirm.resolve();
           });
         },
         (error) => {
           alert(error);
         });
-        // console.log(event.newData);
+    // Вопрос о создании нового выпуска (No):
     } else {
       event.confirm.reject();
     }
