@@ -109,9 +109,11 @@ export class SupInpComponent implements OnInit {
           this.tce_service.getAllSupInps()
           .then((sup_inp) => {
                 this.sup_inp = sup_inp;
-                console.log('onCreateConfirm last.id=', this.sup_inp[0].id, new Date().getTimezoneOffset()); //Date.now().toString());
-                const iDH: IDeclHdr = {
-                    id:               -1,
+                // Создается запись в Decl_Hdr
+                this.DeclService.getNewHdrId()
+                .then((newId) => {
+                  const iDH: IDeclHdr = {
+                    id:               (newId.valueOf() + 1),
                     calc_on_date:     null,
                     sinp_id:          this.sup_inp[0].id,
                     is_current:       'Y',
@@ -121,16 +123,18 @@ export class SupInpComponent implements OnInit {
                     usr:              this.sup_inp[0].usr
                   };
                   this.DeclService.createDeclHeader(iDH).subscribe((dataDH: any) => {
-                    console.log('dataDH:', dataDH);
+                    // Тут нужно выполнить заполнение ЗВ
                   });
                 this.sup_inp_loaded = true;
                 event.confirm.resolve();
+
+                });
           });
         },
         (error) => {
           alert(error);
         });
-        console.log(event.newData);
+        // console.log(event.newData);
     } else {
       event.confirm.reject();
     }

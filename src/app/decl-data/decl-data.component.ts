@@ -28,13 +28,12 @@ export class DeclDataComponent implements OnInit {
     .subscribe(params => {
       this.VypId = parseInt(params['id'], 10) || -888;
       this.VypTag = params['tag'] || '-';
-
       this.declHdrService.getAllDeclHdr('Y', this.VypId)
       .then((DeclHdrList) => {
             this.DeclHdrList = DeclHdrList;
             console.log(this.DeclHdrList);
        });
-  
+
 /*
     this.tce_service.getTceZV(this.TceId)
     .then((TceZV) => {
