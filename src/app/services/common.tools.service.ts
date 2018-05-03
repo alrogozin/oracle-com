@@ -11,18 +11,21 @@ export class CommonToolsService {
 	}
 
 	public NextId(sequenceName: string): Promise<any> {
-		let rpcName = '';
-		if (sequenceName === 'decl_hdr_id_seq') {
-			rpcName = 'seq_nextval_dh';
-		} else {
-			const errText = 'Error: ' + 'undefined sequence name: ' + sequenceName;
-			console.error(errText);
-			return Promise.reject(errText);
-		}
+		const headers = new HttpHeaders().set('content-Type', 'application/x-www-form-urlencoded');
 		return this.http
-			.post(DB_SERVER + '/rpc/' + rpcName, null )
+			.post(DB_SERVER + '/rpc/seq_nextval', { p_seq_name: 'eco.decl_hdr_id_seq' } )
 			.toPromise()
-			.then(response => response.json()[0].seq_nextval_dh
+			.then(response => response.json()
+			)
+			.catch(this.HandleError);
+	}
+
+	public callAnyProc(procName: string, pars: any): Promise<any> {
+		const headers = new HttpHeaders().set('content-Type', 'application/x-www-form-urlencoded');
+		return this.http
+			.post(DB_SERVER + '/rpc/' + procName, pars )
+			.toPromise()
+			.then(response => response.json()
 			)
 			.catch(this.HandleError);
 	}

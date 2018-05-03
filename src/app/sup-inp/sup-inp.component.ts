@@ -111,9 +111,9 @@ export class SupInpComponent implements OnInit {
                 this.sup_inp = sup_inp;
                 this.CommonToolsSrv.NextId('decl_hdr_id_seq')
                 .then((newId) => {
-                // Создается запись в Decl_Hdr
+                  // Создается запись в Decl_Hdr
                   const iDH: IDeclHdr = {
-                    id:               (newId.valueOf() + 1),
+                    id:               parseInt(newId, 10) + 1,
                     calc_on_date:     null,
                     sinp_id:          this.sup_inp[0].id,
                     is_current:       'Y',
@@ -146,18 +146,20 @@ export class SupInpComponent implements OnInit {
 
   onDeleteConfirm(event) {
     if (window.confirm('Удалить выпуск "' + event.data.tag + '"?')) {
+      this.CommonToolsSrv.callAnyProc('del_sinp', {p_sinp_id: event.data.id}).then((response) => {
         this.tce_service.deleteSup(event.data.id.toString()).subscribe((data: any) => {
-          this.tce_service.getAllSupInps()
-          .then((sup_inp) => {
-                this.sup_inp = sup_inp;
-                this.sup_inp_loaded = true;
-                event.confirm.resolve();
-          });
+              this.tce_service.getAllSupInps()
+              .then((sup_inp) => {
+                    this.sup_inp = sup_inp;
+                    this.sup_inp_loaded = true;
+                    event.confirm.resolve();
+            });
         },
         (error) => {
           alert(error);
         });
-      } else {
+      });
+    } else {
       event.confirm.reject();
     }
   }
