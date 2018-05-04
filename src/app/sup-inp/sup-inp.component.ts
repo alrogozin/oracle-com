@@ -125,9 +125,11 @@ export class SupInpComponent implements OnInit {
                   this.DeclService.createDeclHeader(iDH).subscribe((dataDH: any) => {
                     this.DeclService.getAllDeclHdr('Y', this.sup_inp[0].id)
                     .then((decl_hdr) => {
-                      // console.log(decl_hdr);
+                      // Тут нужно выполнить заполнение ЗВ
+                      this.CommonToolsSrv.callAnyProc('fill_data', {p_hdr_id: decl_hdr[0].id}).then((response) => {
+                        console.log('done:', response);
+                      });
                     });
-                    // Тут нужно выполнить заполнение ЗВ
                   });
                 });
 
